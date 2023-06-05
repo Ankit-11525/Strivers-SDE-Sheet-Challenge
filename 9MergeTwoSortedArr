@@ -1,0 +1,65 @@
+#include <bits/stdc++.h>
+
+vector<int> ninjaAndSortedArrays(vector<int>& a, vector<int>& b, int m, int n) {
+	vector<int> v;
+	int i=0,j=0;
+	while(i<m && j<n)
+	{
+		if(a[i]<b[j])
+		{
+			v.push_back(a[i]);
+			i++;
+		}
+		else
+		{
+			v.push_back(b[j]);
+			j++;
+		}
+	}
+	while(i<m)
+	{
+		v.push_back(a[i]);
+		i++;
+	}
+	while(j<n)
+	{
+		v.push_back(b[j]);
+		j++;
+	}
+	return v;
+}
+
+
+
+
+
+#include <bits/stdc++.h>
+
+vector<int> ninjaAndSortedArrays(vector<int>& a, vector<int>& b, int m, int n) {
+	int i=0;
+	while(i<m)
+	{
+		if(a[i]<b[0])
+		{
+			i++;
+		}
+		else
+		{
+			swap(a[i],b[0]);
+			int j=0;
+			while(j+1<n && b[j]>b[j+1])
+			{
+				swap(b[j],b[j+1]);
+				j++;
+			}
+			i++;
+		}
+	}
+	int k=0;
+	while(k<n)
+	{
+		a[m+k]=b[k];
+		k++;
+	}
+	return a;
+}
