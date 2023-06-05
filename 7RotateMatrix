@@ -1,0 +1,51 @@
+#include <bits/stdc++.h>
+
+void rotateMatrix(vector<vector<int>> &mat, int n, int m)
+{
+    int top=0,bottom=n-1,left=0,right=m-1;
+    while(top<bottom && left<right)
+    {
+        int temp=mat[top][left];
+        int j=bottom-1;
+        int last=mat[j+1][left];
+        while(j>=top)
+        {
+            int now=mat[j][left];
+            mat[j][left]=last;
+            last=now;
+            j--;
+        }
+        j=right-1;
+        last=mat[bottom][j+1];
+        while(j>=left)
+        {
+            int now=mat[bottom][j];
+            mat[bottom][j]=last;
+            last=now;
+            j--;
+        }
+        j=top+1;
+        last=mat[j-1][right];
+        while(j<=bottom)
+        {
+            int now=mat[j][right];
+            mat[j][right]=last;
+            last=now;
+            j++;
+        }
+        j=left+1;
+        last=mat[top][j-1];
+        while(j<=right)
+        {
+            int now=mat[top][j];
+            mat[top][j]=last;
+            last=now;
+            j++;
+        }
+        mat[top][left+1]=temp;
+        top++;
+        left++;
+        bottom--;
+        right--;
+    }
+}
