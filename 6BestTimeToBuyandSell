@@ -1,0 +1,20 @@
+#include <bits/stdc++.h> 
+int maximumProfit(vector<int> &prices)
+{
+    int nowmax=prices.back();
+    int maxi=0;
+    // vector<int> dp(prices.size(),0);
+    // dp.back()=0;
+
+    for(int i=prices.size()-2;i>=0;i--)
+    {
+        if(prices[i]<nowmax)
+        {
+            maxi=max(maxi,nowmax-prices[i]);
+        }
+        else{
+            nowmax=prices[i];
+        }
+    }
+    return maxi;
+}
