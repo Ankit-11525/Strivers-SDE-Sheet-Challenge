@@ -1,0 +1,25 @@
+#include <bits/stdc++.h> 
+vector<int> nextPermutation(vector<int> &p, int n)
+{
+    int imp=-1;
+    for(int i=n-1;i>=1;i--)
+    {
+        if(p[i-1]<p[i])
+        {
+            imp=i;
+            break;
+        }
+    }
+    if(imp==-1)
+    {
+        sort(p.begin(),p.end());
+        return p;
+    }
+    sort(p.begin()+imp,p.end());
+    imp--;
+    int nextgreater=upper_bound(p.begin()+imp+1,p.end(),p[imp])-p.begin();
+
+    swap(p[nextgreater],p[imp]);
+    
+    return p;
+}
