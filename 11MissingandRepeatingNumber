@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+using namespace std;
+pair<int,int> missingAndRepeating(vector<int> &arr, int n)
+{
+	int x=0;
+	int rem=arr.size()%4;
+	if(rem==0)
+	{
+		x=arr.size();
+	}
+	else if(rem==1)
+	{
+		x=1;
+	}
+	else if(rem==2)
+	{
+		x=arr.size()+1;
+	}
+	else if(rem==3)
+	{
+		x=0;
+	}
+	for(auto e:arr) 
+	{
+		x=x xor e;
+	}
+	unordered_map<int,int> m;
+	for(auto e:arr) 
+	{
+		int temp=x^e;
+		// cout<<temp<<" "<<endl;
+		m[temp]++;
+		if(m[temp]>1) return {temp,e};
+	}
+	return {0,0};
+}
