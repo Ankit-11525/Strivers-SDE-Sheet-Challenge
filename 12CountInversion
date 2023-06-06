@@ -1,0 +1,57 @@
+#include <bits/stdc++.h> 
+using namespace std;
+long long ans=0;
+vector<long long> merge(vector<long long>a,vector<long long> b)
+{
+    vector<long long> v;
+    int i=0,j=0;
+    while(i<a.size() && j<b.size())
+    {
+        if(a[i]<b[j])
+        {
+            v.push_back(a[i]);
+            i++;
+        }
+        else
+        {
+            v.push_back(b[j]);
+            j++;
+        }
+    }
+    while(i<a.size())
+    {
+        v.push_back(a[i++]);
+    }
+    while(j<b.size())
+    {
+        v.push_back(b[j++]);
+    }
+    return v;
+}
+vector<long long>  mergesort(long long *arr, int s,int e)
+{
+    if(s>e) return{} ;
+    if(s==e) return {arr[s]};
+    int m=(s+e)/2;
+    vector<long long>leftsorted=mergesort(arr,s,m);
+    vector<long long>rightsorted=mergesort(arr,m+1,e);
+    vector<long long> sorted=merge(leftsorted,rightsorted);
+    int i=0,j=0;
+    while(i<leftsorted.size() && j<rightsorted.size())
+    {
+        if(leftsorted[i]>rightsorted[j])
+        {
+            ans+=leftsorted.size()-i;
+            j++;
+        }
+        else
+        {
+            i++;
+        }
+    }
+    return sorted;
+}
+long long getInversions(long long *arr, int n){
+    vector<long long> sorted=mergesort(arr,0,n-1);
+    return ans;
+}
