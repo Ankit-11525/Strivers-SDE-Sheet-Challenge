@@ -1,0 +1,19 @@
+#include <bits/stdc++.h>
+long long binaryexpo(int x,int n,int m)
+{
+	if(n==0) return 1;
+	if(n==1) return x;
+	long long smallans=binaryexpo(x,n/2,m);
+	smallans=(long long)(smallans+m)%m;
+	smallans=(long long)((smallans%m)*(smallans%m))%m;
+	if(n%2==1)
+	{
+		smallans=((((smallans+m)%m)*((x+m)%m))+m)%m;
+	}
+	return (long long)(smallans+m)%m;
+}
+int modularExponentiation(int x, int n, int m) 
+{
+	int ans=binaryexpo(x,n,m);
+	return (int)(ans+m)%m;
+}
