@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+
+string fourSum(vector<int> arr, int target, int n) 
+{
+    sort(arr.begin(),arr.end());
+    unordered_map<int,pair<int,int>> m;
+    for(int i=0;i<n;i++)
+    {
+      for (int j = i + 1; j < n; j++) {
+          m[arr[i]+arr[j]]={i,j};
+      }
+    }
+    for(int i=0;i<n;i++)
+    {
+        int tar=target-arr[i];
+        for(int j=i+1;j<n;j++)
+        {
+            // cout<<tar<<endl;
+            int tari=tar-arr[j];
+            if(m.find(tari)!=m.end())
+            {
+                if(m[tari].first!=i && m[tari].first!=j &&
+                 m[tari].second!=i && m[tari].second!=j)
+                {
+                    // cout<<tari<<" : "<<i<<" "<<j<<
+                    // " "<<m[tari].first<<" "<<m[tari].second<<endl;
+                    return "Yes";
+
+                }
+            }
+        }
+    }
+    return "No";
+}
