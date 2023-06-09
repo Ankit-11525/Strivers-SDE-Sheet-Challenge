@@ -1,0 +1,39 @@
+#include <bits/stdc++.h>
+using namespace std;
+int LongestSubsetWithZeroSum(vector < int > arr) {
+int maxi=0;
+  unordered_map<int,int>m;
+  vector<int> pre(arr.size(),0);
+  pre[0]=arr[0];
+  m[pre[0]]=0;
+  for(int i=1;i<arr.size();i++)
+  {
+    pre[i]=pre[i-1]+arr[i];
+    if(pre[i]==0)
+    {
+      maxi=i+1;
+    }
+    if(m.find(pre[i])!=m.end())
+    {
+      // cout<<i<<" "<<m[pre[i]]<<endl;
+      maxi=max(maxi,i-m[pre[i]]);
+    }
+    else
+    {
+      m[pre[i]]=i;
+    }
+  }
+if(pre.back()==0)
+{
+  return arr.size();
+}
+// cout<<endl;
+// 1 3 -1 4 -4
+
+// for(auto e:pre)
+// {
+//   cout<<e<<" ";
+// }
+// cout<<endl;
+return maxi;
+}
