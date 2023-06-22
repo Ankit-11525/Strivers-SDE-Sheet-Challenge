@@ -1,0 +1,29 @@
+#include <bits/stdc++.h> 
+int uniqueSubstrings(string s)
+{
+   if(s.size()==0 || s.size()==1)return s.size();
+   int i=0;
+   int j=0;
+   int maxi=0;
+   unordered_map<char,int> m;
+   while(j<s.size())
+   {
+      if(m.find(s[j])!=m.end())
+      {
+         while(s[i]!=s[j])
+         {
+            m[s[i]]--;
+            if(m[s[i]]==0) m.erase(s[i]);
+            i++;
+         }
+         i++,j++;
+      }
+      else
+      {
+         m[s[j]]++;
+         maxi=max(maxi,j-i+1);
+         j++;
+      }
+   }
+   return maxi;
+}
