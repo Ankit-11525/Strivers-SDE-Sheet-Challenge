@@ -1,0 +1,50 @@
+/*
+Following is the class structure of the Node class:
+
+class Node
+{
+public:
+    int data;
+    Node *next;
+    Node()
+    {
+        this->data = 0;
+        next = NULL;
+    }
+    Node(int data)
+    {
+        this->data = data; 
+        this->next = NULL;
+    }
+    Node(int data, Node* next)
+    {
+        this->data = data;
+        this->next = next;
+    }
+};
+*/
+int calclength(Node* temp)
+{
+    int cnt=0;
+    while(temp!=NULL)
+    {
+        cnt++;
+        temp=temp->next;
+    }
+    return cnt;
+}
+Node *findMiddle(Node *head) {
+   int length=calclength(head);
+   int mid=(length+1)/2;
+//    cout<<length<<" " <<mid<<endl;
+if(length%2==1)mid--;
+   
+//    cout<<mid<<endl;
+   Node *temp=head;
+   while(mid--)
+   {
+       temp=temp->next;
+   }
+   return temp;
+}
+
