@@ -1,0 +1,84 @@
+/**
+ * Definition of linked list:
+ *
+ * class Node {
+ * public:
+ *      int data;
+ *      Node *next;
+ *      Node() {
+ *          this->data = 0;
+ *          this->next = NULL;
+ *      }
+ *      Node(int data) {
+ *          this->data = data;
+ *          this->next = NULL;
+ *      }
+ *      Node (int data, Node *next) {
+ *          this->data = data;
+ *          this->next = next;
+ *      }
+ * };
+ *
+ *************************************************************************/
+
+Node *addTwoNumbers(Node *num1, Node *num2) {
+  int last = 0, c = 0;
+  Node *temp1 = num1;
+  Node *head = NULL;
+  Node *tail = NULL;
+  Node *temp2 = num2;
+  while (temp1 != NULL && temp2 != NULL) {
+    int number = temp1->data + temp2->data + last;
+    int rem = number % 10;
+    last = number / 10;
+    // cout << last << " : " << rem << endl;
+    Node *newnode = new Node(rem);
+    if (c == 0) {
+      c++;
+      head = newnode;
+      tail = newnode;
+    } else {
+      tail->next = newnode;
+      tail = tail->next;
+    }
+    temp1 = temp1->next;
+    temp2 = temp2->next;
+  }
+  while (temp1 != NULL) {
+    int number = temp1->data + last;
+    int rem = number % 10;
+    last = number / 10;
+    Node *newnode = new Node(rem);
+    if (c == 0) {
+      c++;
+      head = newnode;
+      tail = newnode;
+    } else {
+      tail->next = newnode;
+      tail = tail->next;
+    }
+    temp1 = temp1->next;
+  }
+  while (temp2 != NULL) {
+    int number = temp2->data + last;
+    int rem = number % 10;
+    last = number / 10;
+    Node *newnode = new Node(rem);
+    if (c == 0) {
+      c++;
+      head = newnode;
+      tail = newnode;
+    } else {
+      tail->next = newnode;
+      tail = tail->next;
+    }
+    temp2 = temp2->next;
+  }
+  if (last > 0) {
+    Node *newnode = new Node(last);
+    tail->next = newnode;
+    tail = tail->next;
+  }
+
+  return head;
+}
