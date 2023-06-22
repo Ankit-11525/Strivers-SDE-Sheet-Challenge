@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+using namespace std;
+int subarraysXor(vector<int> &arr, int x) {
+  vector<int> prexor(arr.size());
+  prexor[0] = arr[0];
+  unordered_map<int, int> m;
+  m[arr[0]]++;
+  int cnt = 0;
+  if(arr[0]==x) cnt++;
+
+  for (int i = 1; i < arr.size(); i++) {
+    prexor[i] = prexor[i - 1] ^ arr[i];
+    if(prexor[i]==x) cnt++;
+    if (m.find(prexor[i]^x) != m.end()) {
+        // cout<<i<<" ";
+      cnt+=m[prexor[i]^x];
+    }
+    m[prexor[i]]++;
+
+  }
+//   cout<<endl;
+  // for (auto e : prexor) {
+  //   // cout<<e<<" ";
+  // }
+//   for (auto e : arr) {
+//     if (x == e)
+//       cnt++;
+//   }
+//   cout << endl;
+  return cnt;
+}
