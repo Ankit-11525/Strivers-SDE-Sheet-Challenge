@@ -1,0 +1,83 @@
+#include <bits/stdc++.h>
+
+/************************************************************
+
+    Following is the linked list node structure.
+
+    template <typename T>
+    class Node {
+        public:
+        T data;
+        Node* next;
+
+        Node(T data) {
+            next = NULL;
+            this->data = data;
+        }
+
+        ~Node() {
+            if (next != NULL) {
+                delete next;
+            }
+        }
+    };
+
+************************************************************/
+
+Node<int> *sortTwoLists(Node<int> *first, Node<int> *second) {
+  Node<int> *head = NULL;
+  Node<int> *tail;
+  int check = 0;
+  Node<int> *temp1 = first;
+  Node<int> *temp2 = second;
+  while (temp1 != NULL && temp2 != NULL) {
+    if (temp1->data > temp2->data) {
+      if (check == 0) {
+        check++;
+
+        head = temp2;
+        tail = head;
+
+      } else {
+        tail->next = temp2;
+        tail = tail->next;
+      }
+      temp2 = temp2->next;
+    } else {
+      if (check == 0) {
+        head = temp1;
+        tail = head;
+        check++;
+      } else {
+        tail->next = temp1;
+        tail = tail->next;
+      }
+      temp1 = temp1->next;
+    }
+  }
+  while (temp2 != NULL) {
+    if (check == 0) {
+      check++;
+
+      head = temp2;
+      tail = head;
+
+    } else {
+      tail->next = temp2;
+      tail = tail->next;
+    }
+    temp2 = temp2->next;
+  }
+  while (temp1 != NULL) {
+    if (check == 0) {
+      head = temp1;
+      tail = head;
+      check++;
+    } else {
+      tail->next = temp1;
+      tail = tail->next;
+    }
+    temp1 = temp1->next;
+  }
+return head;
+}
